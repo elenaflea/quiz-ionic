@@ -1,0 +1,7 @@
+{
+  "name": "TPExamp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
