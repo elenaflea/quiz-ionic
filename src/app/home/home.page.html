@@ -1,20 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Open Trivia
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+ <ion-card>
+  <div 
+ 
+   style="padding: 10px;">
+    <ion-list>
+      <div class="center">
+        <img src="../../assets/ava4.gif" height="200px" width="200px"/>
+      </div>
+      <ion-item>
+        <ion-input type="text" label="Votre pseudo" labelPlacement="floating" [(ngModel)]="pseudo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-select label="Difficulté" [(ngModel)]="difficulty">
+          <ion-select-option *ngFor="let diff of listDifficulties" value="{{ diff }}">{{ diff | titlecase }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-toggle [(ngModel)]="saveInfos">Sauvegarder mes informations</ion-toggle>
+      </ion-item>
+    </ion-list>
+   
+    <ion-button expand="full" (click)="begin()">Commencer</ion-button>
+    <ion-alert
+      [isOpen]="isAlertOpen"
+      header="Information Manquante"
+      message="Veuillez rentrer un pseudo de 3 caractères minimum"
+      [buttons]="alertButtons"
+    ></ion-alert>
   </div>
+</ion-card>
+
 </ion-content>

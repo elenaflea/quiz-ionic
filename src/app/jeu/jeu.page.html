@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Open Trivia
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <!--
+    <ion-card>
+    <div *ngIf="!beginGame" style="padding: 10px;">
+        
+      <ion-list>
+        <div class="center">
+          <img src="../../assets/ava4.gif" height="200px" width="200px"/>
+        </div>
+        
+        <ion-item>
+         
+          <ion-input type="text" label="Votre pseudo" labelPlacement="floating" [(ngModel)]="pseudo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Difficulté" [(ngModel)]="difficulty">
+            <ion-select-option *ngFor="let diff of listDifficulties" value="{{ diff }}">{{ diff | titlecase }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-toggle [(ngModel)]="saveInfos">Sauvegarder mes informations</ion-toggle>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" (click)="begin()">Commencer</ion-button>
+      <ion-alert
+        [isOpen]="isAlertOpen"
+        header="Information Manquante"
+        message="Veuillez rentrer un pseudo de 3 caractères minimum"
+        [buttons]="alertButtons"
+      ></ion-alert>
+    </div>
+  </ion-card>
+  -->
+  <ion-card>
+    <div *ngIf="beginGame" style="padding: 10px;">
+      <ion-text color="primary">Bienvenue {{ pseudo }}</ion-text>
+      <br/>
+      <ion-text color="primary">Votre score : {{ score }} /10</ion-text>
+      <h2 class="ion-text-center" [innerHTML]="currentQuestion?.question"></h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let response of currentQuestion?.listAnswers" size="6">
+            <ion-button expand="block" (click)="answer(response)" class="unknown" [ngClass]="{'bad': nextQuestion && !response.isCorrect, 'good': nextQuestion && response.isCorrect}" [innerHTML]="response.label">
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button expand="full" *ngIf="nextQuestion && index < listQuestions.length - 1" (click)="loadNextQuestion()">Question suivante</ion-button>
+      <ion-button expand="full" *ngIf="nextQuestion && index >= listQuestions.length - 1" (click)="playAgain()">Rejouer</ion-button>
+     <!--
+      <ion-toast
+        [isOpen]="isToastOpen"
+        [message]="'Votre score est de ' + score"
+        [duration]="4000"
+        (didDismiss)="setOpen(false)"
+      ></ion-toast>
+      --> 
+    </div>
+  </ion-card>
+  </ion-content>
+  
