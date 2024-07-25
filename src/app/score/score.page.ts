@@ -1,3 +1,4 @@
+import { StorageService } from './../services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,11 +17,20 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 export class ScorePage implements OnInit {
   score: number = 0;
   photo: string = '';
+  saveInfos: string ='false';
 
-  constructor(private activatedRoute: ActivatedRoute, private navCtrl: NavController) { }
+  constructor(private activatedRoute: ActivatedRoute, private navCtrl: NavController, private storageService: StorageService) { }
 
-  ngOnInit() {
-    this.score = this.activatedRoute.snapshot.params['score'];
+  async ngOnInit() {
+    this.score = parseInt(this.activatedRoute.snapshot.params['score']);
+    this.saveInfos= this.activatedRoute.snapshot.params['saveInfos'];
+    console.log(this.saveInfos);
+    if(this.saveInfos === "true") {
+      const oldScore: number =  await(this.storageService.getScore());
+      console.log(oldScore);
+      const totalScore : number = this.score + oldScore;
+      this.storageService.setScore(totalScore);
+    }
   }
 
   goHome() {

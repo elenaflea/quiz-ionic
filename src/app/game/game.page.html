@@ -6,6 +6,8 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-text color="primary">Bienvenue {{ pseudo }}</ion-text>
+  <br/>
+  <ion-text color="primary">Score : {{ score }} / 10</ion-text>
     <h2 class="ion-text-center" [innerHTML]="currentQuestion?.question"></h2>
     <ion-button color="tertiary" (click)="readText(currentQuestion?.question)">Lire la question</ion-button>
     <ion-grid>

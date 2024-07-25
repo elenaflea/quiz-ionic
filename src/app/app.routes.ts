@@ -19,7 +19,7 @@ export const routes: Routes = [
     loadComponent: () => import('./jeu/jeu.page').then( m => m.JeuPage)
   },
   {
-    path: 'game/:pseudo/:difficulty',
+    path: 'game/:pseudo/:difficulty/:saveInfos',
     loadComponent: () => import('./game/game.page').then( m => m.GamePage)
   },
   {
